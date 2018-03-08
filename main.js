@@ -1,7 +1,7 @@
 window.addEventListener('load', function(event)
 {
     //TEMP CLEAR AV LOCAL STORAGE - REMOVE!!!!
-    localStorage.clear();
+    //localStorage.clear();
 
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
@@ -12,7 +12,10 @@ window.addEventListener('load', function(event)
     .addEventListener('submit', editBook);
     let fetchBookBtn = document.getElementById('fetchBookBtn')
     .addEventListener('click', fetchBooks);
+    let deleteBookBtn = document.getElementById('deleteBook')
+    .addEventListener('submit', deleteBook);
   
+    //TEST BUTTONS
     let getKeyBtn = document.getElementById('getKeyBtn')
     .addEventListener('click', getRequestKey);
     let getLocalStorage = this.document.getElementById('getLocalStorage')
@@ -50,12 +53,13 @@ window.addEventListener('load', function(event)
                     <ul>
                         <li>ID: ${book.id}</li>
                         <li>Title: ${book.title}</li>
-                        <li>Author:${book.author}</li>
+                        <li>Author: ${book.author}</li>
                     </ul>`;
             });
             document.getElementById('bookListDiv').innerHTML = bookListDiv;
         })
     }
+
 
     // Update book function
     function editBook(e){
@@ -75,6 +79,27 @@ window.addEventListener('load', function(event)
 
     }
 
+    // Delete book function
+    function deleteBook(e){
+        e.preventDefault();
+
+        let id = document.getElementById('deleteBookId').value;
+        let request = new Request(url + 'op=delete&key=' + key + '&id=' + id, {
+            method: 'POST',
+        });
+        
+        fetch(request)
+        .then(response => response.json())
+        .then(function(data){
+            if(data.status === "success"){
+                console.log(data);
+            }
+            else{
+                data.status + " " + data.message;
+            }
+        })
+
+    }
   
     //Request key function
     function getRequestKey(){

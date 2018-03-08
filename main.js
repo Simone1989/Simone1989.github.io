@@ -6,8 +6,10 @@ window.addEventListener('load', function(event)
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
 
-    let addBookBtn = document.getElementById('addBook')
+    let addBookForm = document.getElementById('addBook')
     .addEventListener('submit', addBook);
+    let editBookForm = document.getElementById('editBook')
+    .addEventListener('submit', editBook);
     let fetchBookBtn = document.getElementById('fetchBookBtn')
     .addEventListener('click', fetchBooks);
     let deleteBookBtn = document.getElementById('deleteBook')
@@ -44,7 +46,7 @@ window.addEventListener('load', function(event)
         fetch(request)
         .then(response => response.json())
         .then(data => {
-            let bookListDiv = '<h3>List of Jones</h3>';
+            let bookListDiv = '<h3>Books:</h3>';
             console.log('Data: ' , data);
             data.data.forEach(function(book){
                 bookListDiv += `
@@ -56,6 +58,25 @@ window.addEventListener('load', function(event)
             });
             document.getElementById('bookListDiv').innerHTML = bookListDiv;
         })
+    }
+
+
+    // Update book function
+    function editBook(e){
+        e.preventDefault();
+        let editBookTitle = document.getElementById('editBookTitle').value;
+        let editBookAuthor = document.getElementById('editAuthor').value;
+        let editBookId = document.getElementById('editBookId').value;
+
+        let request = new Request(url + 'op=update&key=' + key + '&id=' + editBookId + '&title=' + editBookTitle + '&author=' + editBookAuthor, { method: 'POST'});
+        
+        fetch(request)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(function(error){
+            console.log(error)
+        });
+
     }
 
     // Delete book function

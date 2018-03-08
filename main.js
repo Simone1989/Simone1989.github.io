@@ -5,7 +5,7 @@ window.addEventListener('load', function(event)
 
     let addBookForm = document.getElementById('addBook');
     let editBookForm = document.getElementById('editBook');
-    let addBookBtn = document.getElementById('addBookBtn')
+    let addBookBtn = document.getElementById('addBook')
     .addEventListener('submit', addBook);
 
     
@@ -28,4 +28,25 @@ window.addEventListener('load', function(event)
 
     //Local Storage
 
+
+    // Function for adding books
+    function addBook(e){
+        e.preventDefault();
+
+        let bookTitle = document.getElementById('addBookTitle').value;
+        let bookAuthor = document.getElementById('addAuthor').value;
+        console.log(bookAuthor + bookTitle);
+
+        let request = new Request(url + 'op=insert&key=' + key + '&title=' + bookTitle + '&author=' + bookAuthor, { method: 'POST'});
+
+            fetch(request)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(function (error){
+                console.log(error);
+            }
+        )}
+
+
+        
 });

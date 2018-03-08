@@ -6,10 +6,10 @@ window.addEventListener('load', function(event)
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
 
-    let addBookForm = document.getElementById('addBook');
-    let editBookForm = document.getElementById('editBook');
     let addBookBtn = document.getElementById('addBook')
     .addEventListener('submit', addBook);
+    let fetchBookBtn = document.getElementById('fetchBookBtn')
+    .addEventListener('click', fetchBooks);
   
     let getKeyBtn = document.getElementById('getKeyBtn')
     .addEventListener('click', getRequestKey);
@@ -33,6 +33,28 @@ window.addEventListener('load', function(event)
                 console.log(error);
             }
         )}
+
+    // Fetch book function
+    function fetchBooks(){
+        let request = new Request(url + 'op=select&key=' + key);
+
+        fetch(request)
+        .then(response => response.json())
+        .then(data => {
+            let bookListDiv = '<h3></h3>';
+            console.log('Data: ' , data);
+            data.data.forEach(function(book){
+                bookListDiv += `
+                    <ul>
+                        <li>${book.id}</li>
+                        <li>${book.title}</li>
+                        <li>${book.author}</li>
+                    </ul>`;
+            });
+            document.getElementById('bookListDiv').innerHTML = bookListDiv;
+        })
+    }
+
   
     //Request key function
     function getRequestKey(){

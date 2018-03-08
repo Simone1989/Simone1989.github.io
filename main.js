@@ -1,5 +1,8 @@
 window.addEventListener('load', function(event)
 {
+    //TEMP CLEAR AV LOCAL STORAGE - REMOVE!!!!
+    localStorage.clear();
+
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
 
@@ -11,6 +14,8 @@ window.addEventListener('load', function(event)
     
     let getKeyBtn = document.getElementById('getKeyBtn')
     .addEventListener('click', getRequestKey);
+    let getLocalStorage = this.document.getElementById('getLocalStorage')
+    .addEventListener('click', getLocalStorageKey);
     
     //Request key function
     function getRequestKey(){
@@ -22,10 +27,13 @@ window.addEventListener('load', function(event)
         })
         .then(function(data){
             key = data.key;
+            localStorage.setItem('LocalStorageKey', key);
             console.log("Key is: " + key);
         })
     }
 
     //Local Storage
-
+    function getLocalStorageKey(){
+        console.log(localStorage);
+    }
 });

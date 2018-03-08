@@ -6,6 +6,7 @@ window.addEventListener('load', function(event)
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
 
+    let statusDiv = document.getElementById('statusDiv');
     let addBookForm = document.getElementById('addBook')
     .addEventListener('submit', addBook);
     let editBookForm = document.getElementById('editBook')
@@ -33,7 +34,7 @@ window.addEventListener('load', function(event)
 
             fetch(request)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => statusDiv.innerText = data.status)
             .catch(function (error){
                 console.log(error);
             }
@@ -56,6 +57,7 @@ window.addEventListener('load', function(event)
                         <li>Author: ${book.author}</li>
                     </ul>`;
             });
+            statusDiv.innerText = data.status;
             document.getElementById('bookListDiv').innerHTML = bookListDiv;
         })
     }
@@ -72,7 +74,7 @@ window.addEventListener('load', function(event)
         
         fetch(request)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => statusDiv.innerText = data.status)
         .catch(function(error){
             console.log(error)
         });
@@ -97,6 +99,7 @@ window.addEventListener('load', function(event)
             else{
                 data.status + " " + data.message;
             }
+            statusDiv.innerText = data.status;
         })
 
     }

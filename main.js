@@ -1,30 +1,31 @@
-window.addEventListener('load', function(event){
-
-
-    // ha en fetch som genererar en lista med 
-    // böckerna
+window.addEventListener('load', function(event)
+{
+    const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
+    let key = "";
 
     let addBookForm = document.getElementById('addBook');
     let editBookForm = document.getElementById('editBook');
     let addBookBtn = document.getElementById('addBookBtn')
     .addEventListener('submit', addBook);
 
-    let request = new Request({
-        url: 'https://www.forverkliga.se/JavaScript/api/crud.php?requestKey',
-        method: 'GET'
-    });
+    
+    let getKeyBtn = document.getElementById('getKeyBtn')
+    .addEventListener('click', getRequestKey);
+    
+    //Request key function
+    function getRequestKey(){
+        let request = new Request(url + "requestKey");
 
-
-    function addBook(e){
-        e.preventDefault();
-
-        let bookTitle = document.getElementById('addBookTitle').value;
-        let bookAuthor = document.getElementById('addAuthor').value;
-
-        fetch(request, 'https://www.forverkliga.se/JavaScript/api/crud.php?op=insert')
-        .then(response => response.json())
-        .then(data => console.log(data))
+        fetch(request)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            key = data.key;
+            console.log("Key is: " + key);
+        })
     }
 
-    
+    //Local Storage
+
 });

@@ -1,7 +1,7 @@
 window.addEventListener('load', function(event)
 {
     //TEMP CLEAR AV LOCAL STORAGE - REMOVE!!!!
-    localStorage.clear();
+    //localStorage.clear();
 
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
     let key = "";
@@ -10,7 +10,10 @@ window.addEventListener('load', function(event)
     .addEventListener('submit', addBook);
     let fetchBookBtn = document.getElementById('fetchBookBtn')
     .addEventListener('click', fetchBooks);
+    let deleteBookBtn = document.getElementById('deleteBook')
+    .addEventListener('submit', deleteBook);
   
+    //TEST BUTTONS
     let getKeyBtn = document.getElementById('getKeyBtn')
     .addEventListener('click', getRequestKey);
     let getLocalStorage = this.document.getElementById('getLocalStorage')
@@ -41,20 +44,41 @@ window.addEventListener('load', function(event)
         fetch(request)
         .then(response => response.json())
         .then(data => {
-            let bookListDiv = '<h3></h3>';
+            let bookListDiv = '<h3>List of Jones</h3>';
             console.log('Data: ' , data);
             data.data.forEach(function(book){
                 bookListDiv += `
                     <ul>
-                        <li>${book.id}</li>
-                        <li>${book.title}</li>
-                        <li>${book.author}</li>
+                        <li>ID: ${book.id}</li>
+                        <li>Title: ${book.title}</li>
+                        <li>Author: ${book.author}</li>
                     </ul>`;
             });
             document.getElementById('bookListDiv').innerHTML = bookListDiv;
         })
     }
 
+    // Delete book function
+    function deleteBook(e){
+        e.preventDefault();
+
+        let id = document.getElementById('deleteBookId').value;
+        let request = new Request(url + 'op=delete&key=' + key + '&id=' + id, {
+            method: 'POST',
+        });
+        
+        fetch(request)
+        .then(response => response.json())
+        .then(function(data){
+            if(data.status === "success"){
+                console.log(data);
+            }
+            else{
+                data.status + " " + data.message;
+            }
+        })
+
+    }
   
     //Request key function
     function getRequestKey(){

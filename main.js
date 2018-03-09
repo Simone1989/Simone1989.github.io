@@ -41,10 +41,12 @@ window.addEventListener('load', function(event)
             fetch(request)
             .then(response => response.json())
             .then(data => statusDiv.innerText = data.status)
-            .catch(function (error){
-                console.log(error);
-            }
-        )}
+            .catch(function(error){
+                console.log(error)
+            });
+            clearAll();
+            statusDiv.innerText = data.status;
+        }
 
     // Fetch book function
     function fetchBooks(){
@@ -63,6 +65,7 @@ window.addEventListener('load', function(event)
                         <li>Author: ${book.author}</li>
                     </ul>`;
             });
+            clearAll();
             statusDiv.innerText = data.status;
             document.getElementById('bookListDiv').innerHTML = bookListDiv;
         })
@@ -84,7 +87,8 @@ window.addEventListener('load', function(event)
         .catch(function(error){
             console.log(error)
         });
-
+        clearAll();
+        statusDiv.innerText = data.status;
     }
 
     // Delete book function
@@ -105,6 +109,7 @@ window.addEventListener('load', function(event)
             else{
                 data.status + " " + data.message;
             }
+            clearAll();
             statusDiv.innerText = data.status;
         })
 
@@ -122,6 +127,7 @@ window.addEventListener('load', function(event)
             key = data.key;
             localStorage.setItem('LocalStorageKey', key);
             console.log("Key is: " + key);
+            clearAll();
             document.getElementById('keyDiv').innerText = 'Your key is: ' + key;
         })
     }
@@ -131,33 +137,35 @@ window.addEventListener('load', function(event)
         console.log(localStorage);
     }
 
-    // Function to show add book form
-    // VILL HELST HA DET I EN FUNKTION
+    // Function to show add form
     function showAddBookForm(){
-        let edit = document.getElementById("editBook");
-        let add = document.getElementById("addBook");
-        let del = document.getElementById("deleteBook");
-        add.style.display = 'block';
-        del.style.display = 'none';
-        edit.style.display = 'none';
+        clearAll();
+        document.getElementById("addBook").style.display = 'block';
     }
 
+    // Function to show edit form
     function showEditBookForm(){
-        let edit = document.getElementById("editBook");
-        let add = document.getElementById("addBook");
-        let del = document.getElementById("deleteBook");
-        edit.style.display = 'block';
-        del.style.display = 'none';
-        add.style.display = 'none';
+        clearAll();
+        document.getElementById("editBook").style.display = 'block';
     }
 
+    // Function to show delete form
     function showDeleteBookForm(){
+        clearAll();
+        document.getElementById("deleteBook").style.display = 'block';
+    }
+
+    // this function gets called a lot
+    function clearAll(){
         let edit = document.getElementById("editBook");
         let add = document.getElementById("addBook");
         let del = document.getElementById("deleteBook");
-        del.style.display = 'block';
+        del.style.display = 'none';
         add.style.display = 'none';
         edit.style.display = 'none';
+        document.getElementById('keyDiv').innerText = '';
+        document.getElementById('statusDiv').innerText = '';
+        document.getElementById('bookListDiv').innerHTML = '';
     }
 
 });

@@ -1,10 +1,9 @@
 window.addEventListener('load', function(event)
 {
     const url = "https://www.forverkliga.se/JavaScript/api/crud.php?";
-    let key = "";
+    let key = localStorage.getItem('LocalStorageKey');
     let dataStatus = "";
     let numberOfTries = 0;
-    let temp;
 
     let statusDiv = document.getElementById('statusDiv');
     let addBookForm = document.getElementById('addBook')
@@ -21,7 +20,7 @@ window.addEventListener('load', function(event)
     .addEventListener('click', getRequestKey);
     let getLocalStorage = this.document.getElementById('getLocalStorage')
     .addEventListener('click', getLocalStorageKey);
-    
+
     // Function for adding books
     function addBook(e){
         e.preventDefault();
@@ -31,30 +30,24 @@ window.addEventListener('load', function(event)
 
         let request = new Request(url + 'op=insert&key=' + key + '&title=' + bookTitle + '&author=' + bookAuthor, { method: 'POST'});
 
-            fetch(request)
-            .then(response => response.json())
-            .then(function(data){
-                if(data.status === "success" && numberOfTries < 10){
-                numberOfTries++;
-                temp = numberOfTries;
-                numberOfTries = 0;
-                return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
-            }
-            else if(data.status !== "success" && numberOfTries < 10){
-                numberOfTries++;
-                console.log(data.status + ": failed attempts " + numberOfTries + "/10");
-                return addBook(e);
-            }
-            else if(numberOfTries >= 10){
-                temp = numberOfTries;
-                numberOfTries = 0;
-                console.log("connection failure " + data.status + ": reached maximum attempts: " + temp + "/10");
-                return statusDiv.innerHTML = data.status + "</br>Operation failed after " + temp + " tries.</br>" + data.message;
-            }
+        fetch(request)
+        .then(response => response.json())
+        .then(function(data){
+            if(data.status === "success" && numberOfTries < 10){
+            operationFinished(data);
+        }
+        else if(data.status !== "success" && numberOfTries < 10){
+            numberOfTries++;
+            console.log(data.status + ": failed attempts " + numberOfTries + "/10");
+            return addBook(e);
+        }
+        else if(numberOfTries >= 10){
+            operationFailed(data);
+        }
         })
-            .catch(function (error){
-                console.log(error);
-            }
+        .catch(function (error){
+            console.log(error);
+        }
         )}
 
     // Fetch book function
@@ -65,9 +58,7 @@ window.addEventListener('load', function(event)
         .then(response => response.json())
         .then(data => {
             if(data.status === "success" && numberOfTries < 10){
-                numberOfTries++;
                 let bookListDiv = '<h3>Books:</h3>';
-                console.log('Data: ' , data);
                 data.data.forEach(function(book){
                     bookListDiv += `
                         <ul>
@@ -77,9 +68,7 @@ window.addEventListener('load', function(event)
                         </ul>`;
                 });
                 document.getElementById('bookListDiv').innerHTML = bookListDiv;
-                temp = numberOfTries;
-                numberOfTries = 0;
-                return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
+                operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
                 numberOfTries++;
@@ -87,14 +76,10 @@ window.addEventListener('load', function(event)
                 return fetchBooks();
             }
             else if(numberOfTries >= 10){
-                temp = numberOfTries;
-                numberOfTries = 0;
-                console.log("connection failure " + data.status + ": reached maximum attempts: " + temp + "/10");
-                return statusDiv.innerHTML = data.status + "</br>Operation failed after " + temp + " tries.</br>" + data.message;    
+                operationFailed(data);
             }            
         })
     }
-
 
     // Update book function
     function editBook(e){
@@ -109,10 +94,7 @@ window.addEventListener('load', function(event)
         .then(response => response.json())
         .then(function(data){
             if(data.status === "success" && numberOfTries < 10){
-                numberOfTries++;
-                temp = numberOfTries;
-                numberOfTries = 0;
-                return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
+                operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
                 numberOfTries++;
@@ -120,10 +102,7 @@ window.addEventListener('load', function(event)
                 return editBook(e);
             }
             else if(numberOfTries >= 10){
-                temp = numberOfTries;
-                numberOfTries = 0;
-                console.log("connection failure " + data.status + ": reached maximum attempts: " + temp + "/10");
-                return statusDiv.innerHTML = data.status + "</br>Operation failed after " + temp + " tries.</br>" + data.message;    
+                operationFailed(data);
             }
         })
         .catch(function(error){
@@ -143,25 +122,35 @@ window.addEventListener('load', function(event)
         fetch(request)
         .then(response => response.json())
         .then(function(data){
+            
             if(data.status === "success" && numberOfTries < 10){
-                numberOfTries++;
-                temp = numberOfTries;
-                numberOfTries = 0;
-                return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
+                operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
                 numberOfTries++;
-                console.log(data.status + ": failed attempts " + numberOfTries + "/10");
+                console.log(data.status + ": failed attempt " + numberOfTries + "/10");
                 return deleteBook(e);
             }
             else if(numberOfTries >= 10){
-                temp = numberOfTries;
-                numberOfTries = 0;
-                console.log("connection failure " + data.status + ": reached maximum attempts: " + temp + "/10");
-                return statusDiv.innerHTML = data.status + "</br>Operation failed after " + temp + " tries.</br>" + data.message;    
+                operationFailed(data);    
             }   
         })
+    }
 
+    //Operation finished function
+    function operationFinished(data){
+        numberOfTries++;
+        temp = numberOfTries;
+        numberOfTries = 0;
+        return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
+    }
+
+    //Operation failed function
+    function operationFailed(data){
+        temp = numberOfTries;
+        numberOfTries = 0;
+        console.log("connection failure " + data.status + ": reached maximum attempts: " + temp + "/10");
+        return statusDiv.innerHTML = data.status + "</br>Operation failed after " + temp + " tries.</br>" + data.message;
     }
   
     //Request key function

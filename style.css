@@ -1,6 +1,7 @@
 body{
     margin: 0px;
     background-color: lightskyblue;
+    height: 100%;
 }
 
 .vertical-container {
@@ -32,6 +33,11 @@ body{
   #addBook, #editBook, #deleteBook{
     background-color: lightgreen;
     display: none;
+    color: green;
+  }
+
+  input{
+    background-color: red;
   }
 
   .navBtn{

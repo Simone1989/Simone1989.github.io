@@ -11,10 +11,10 @@ window.addEventListener('load', function(event)
     .addEventListener('submit', addBook);
     let editBookForm = document.getElementById('editBook')
     .addEventListener('submit', editBook);
-    let fetchBookBtn = document.getElementById('fetchBookBtn')
-    .addEventListener('click', fetchBooks);
     let deleteBookBtn = document.getElementById('deleteBook')
     .addEventListener('submit', deleteBook);
+    let fetchBookBtn = document.getElementById('fetchBookBtn')
+    .addEventListener('click', fetchBooks);
     let showAddBookFormBtn = document.getElementById('showAddBookFormBtn')
     .addEventListener('click', showAddBookForm);
     let showEditFormBtn = document.getElementById('showEditFormBtn')
@@ -122,6 +122,7 @@ window.addEventListener('load', function(event)
             key = data.key;
             localStorage.setItem('LocalStorageKey', key);
             console.log("Key is: " + key);
+            document.getElementById('keyDiv').innerText = 'Your key is: ' + key;
         })
     }
 
@@ -131,35 +132,32 @@ window.addEventListener('load', function(event)
     }
 
     // Function to show add book form
-
+    // VILL HELST HA DET I EN FUNKTION
     function showAddBookForm(){
-        let x = document.getElementById("addBook");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } 
-        else {
-            x.style.display = "block";
-        }
+        let edit = document.getElementById("editBook");
+        let add = document.getElementById("addBook");
+        let del = document.getElementById("deleteBook");
+        add.style.display = 'block';
+        del.style.display = 'none';
+        edit.style.display = 'none';
     }
 
     function showEditBookForm(){
-        let x = document.getElementById("editBook");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } 
-        else {
-            x.style.display = "block";
-        }
+        let edit = document.getElementById("editBook");
+        let add = document.getElementById("addBook");
+        let del = document.getElementById("deleteBook");
+        edit.style.display = 'block';
+        del.style.display = 'none';
+        add.style.display = 'none';
     }
 
     function showDeleteBookForm(){
-        let x = document.getElementById("deleteBook");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } 
-        else {
-            x.style.display = "block";
-        }
+        let edit = document.getElementById("editBook");
+        let add = document.getElementById("addBook");
+        let del = document.getElementById("deleteBook");
+        del.style.display = 'block';
+        add.style.display = 'none';
+        edit.style.display = 'none';
     }
 
 });

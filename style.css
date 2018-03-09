@@ -1,0 +1,43 @@
+body{
+    margin: 0px;
+    background-color: lightskyblue;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+  .horizontal-container{
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  h1, footer{
+    text-align: center;
+    background-color: brown;
+    padding: 40px;
+    margin: 0px;
+  }
+
+  .navigation{
+    background-color: lightcoral;
+    padding: 10px;
+  }
+
+
+
+  #addBook, #editBook, #deleteBook{
+    background-color: lightgreen;
+    display: none;
+  }
+
+  .navBtn{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 60px;
+    margin: 10px;
+  }

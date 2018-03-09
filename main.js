@@ -15,6 +15,12 @@ window.addEventListener('load', function(event)
     .addEventListener('click', fetchBooks);
     let deleteBookBtn = document.getElementById('deleteBook')
     .addEventListener('submit', deleteBook);
+    let showAddBookFormBtn = document.getElementById('showAddBookFormBtn')
+    .addEventListener('click', showAddBookForm);
+    let showEditFormBtn = document.getElementById('showEditFormBtn')
+    .addEventListener('click', showEditBookForm);
+    let showDeleteBookFormBtn = document.getElementById('showDeleteBookFormBtn')
+    .addEventListener('click', showDeleteBookForm);
   
     //TEST BUTTONS
     let getKeyBtn = document.getElementById('getKeyBtn')
@@ -123,4 +129,37 @@ window.addEventListener('load', function(event)
     function getLocalStorageKey(){
         console.log(localStorage);
     }
+
+    // Function to show add book form
+
+    function showAddBookForm(){
+        let x = document.getElementById("addBook");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } 
+        else {
+            x.style.display = "block";
+        }
+    }
+
+    function showEditBookForm(){
+        let x = document.getElementById("editBook");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } 
+        else {
+            x.style.display = "block";
+        }
+    }
+
+    function showDeleteBookForm(){
+        let x = document.getElementById("deleteBook");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } 
+        else {
+            x.style.display = "block";
+        }
+    }
+
 });

@@ -5,38 +5,34 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Lab 2 web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:500" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="main.js"></script>
     </head>
     <body>
-
         <div class="horizontal-container header">
             <div><h1>Welcome to the library!</h1></div>
         </div>
-
         <div class="vertical-container">
             <div class="navigation">
-                <button class="navBtn" id="getKeyBtn">GET KEY TEST</button>
-                <button class="navBtn" id="getLocalStorage">Print Local Storage</button>
+                <button class="navBtn" id="getKeyBtn">Get request key</button>
                 <button class="navBtn" id="fetchBookBtn">See all books</button>
                 <button class="navBtn" id="showAddBookFormBtn">Add a book</button>
                 <button class="navBtn" id="showEditFormBtn">Edit a book</button>
                 <button class="navBtn" id="showDeleteBookFormBtn">Delete a book</button>
             </div>
-
             <div class="main">
                 <div id="statusDiv"></div>
                 <div id="bookListDiv"></div>
                 <div id="keyDiv"></div>
             </div>
-
             <form id="addBook">
                 <p>Add a book:</p>
                 <input type="text" id="addBookTitle" placeholder="Book title">
                 <input type="text" id="addAuthor" placeholder="Author">
                 <input type="submit" value="Add book">
             </form>
-
             <form id="editBook">
                 <p>Edit book:</p>
                 <input type="text" id="editBookId" placeholder="Book ID">
@@ -44,7 +40,6 @@
                 <input type="text" id="editAuthor" placeholder="Author">
                 <input type="submit" value="Edit book">
             </form>
-
             <form id="deleteBook">
                 <p>Delete book:</p>
                 <input type="text" id="deleteBookId" placeholder="Book ID">
@@ -56,6 +51,5 @@
         <footer>
             <p>Thank you for stopping by!</p>
         </footer>
-
     </body>
 </html>

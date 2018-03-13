@@ -1,59 +1,60 @@
 body{
-    margin: 0px;
-    background-color: rgb(112, 175, 204);
-    height: 100%;
+  margin: 0px;
+  background-color: #a49698;
+  height: 100%;
 }
-
 .vertical-container {
-    display: flex;
-    flex-direction: row;
-    
-  }
-
-  .horizontal-container{
-    display: flex;
-    flex-direction: column;
-    
-  }
-
-  h1, footer{
-    text-align: center;
-    background-color:rgb(157, 121, 255);
-    color: rgb(72, 40, 102);
-    padding: 40px;
-    margin: 0px;
-  }
-
-
-  .navigation{
-    background-color: rgb(69, 100, 109);
-    padding: 10px;
-  }
-
-  .navBtn{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: 60px;
-    margin: 10px;
-    border: none;
-    text-decoration: none;
-    font-family: Arial;
-    font-size: 16px;
-    font-weight: bold;
-    color: rgb(162, 151, 228);
-    background-color: darkslateblue;
-  }
-
-  button:hover, button:active{
-    color: darkslateblue;
-    background-color: slateblue;
-    text-decoration: none;
-  }
-
-
-  #addBook, #editBook, #deleteBook{
-    background-color: rgb(112, 175, 204);
-    display: none;
-  }
-
+  display: flex;
+  flex-direction: row;
+}
+.horizontal-container{
+  display: flex;
+  flex-direction: column;
+  
+}
+footer{
+  height: 400px;
+  color: black;
+  font-size: 50px;
+}
+h1{
+  font-size: 150px;
+  text-shadow: 3px 3px black;
+  color: #b28589;
+}
+h1, footer{
+  text-align: center;
+  font-family: "Cabin Sketch";
+  background-image: url(images/books1.jpg);
+  padding: 40px;
+  margin: 0px;
+}
+.navigation{
+  background-color: #a49698;
+  padding: 10px;
+}
+.navBtn{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 60px;
+  margin: 10px;
+  border: none;
+  text-decoration: none;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: bold;
+  color:#b28589;
+  background-color: #533235;
+}
+button:hover, button:active{
+  color: #533235;
+  background-color:#b28589;
+  text-decoration: none;
+}
+#addBook, #editBook, #deleteBook{
+  display: none;
+  margin-top: 7px;
+  font-family: "Poppins";
+  color: #371e20;
+}

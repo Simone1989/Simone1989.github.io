@@ -4,7 +4,8 @@ window.addEventListener('load', function(event)
     let key = localStorage.getItem('LocalStorageKey');
     let dataStatus = "";
     let numberOfTries = 0;
-
+    
+    //declaration of elements by id and event listeners for buttons
     let statusDiv = document.getElementById('statusDiv');
     let addBookForm = document.getElementById('addBook')
     .addEventListener('submit', addBook);
@@ -20,27 +21,21 @@ window.addEventListener('load', function(event)
     .addEventListener('click', showEditBookForm);
     let showDeleteBookFormBtn = document.getElementById('showDeleteBookFormBtn')
     .addEventListener('click', showDeleteBookForm);
-  
-    //TEST BUTTONS - SE ÖVER NÄR VI ÄR KLARA OM VILKA SOM BEHÖVER ÄNDRAS OCH SÅ
     let getKeyBtn = document.getElementById('getKeyBtn')
     .addEventListener('click', getRequestKey);
-    let getLocalStorage = this.document.getElementById('getLocalStorage')
-    .addEventListener('click', getLocalStorageKey);
 
-    // Function for adding books
+    //Function for adding books using fetch request
     function addBook(e){
         e.preventDefault();
         let bookTitle = document.getElementById('addBookTitle').value;
         let bookAuthor = document.getElementById('addAuthor').value;
-        console.log(bookAuthor + bookTitle);
-
         let request = new Request(url + 'op=insert&key=' + key + '&title=' + bookTitle + '&author=' + bookAuthor, { method: 'POST'});
 
         fetch(request)
         .then(response => response.json())
         .then(function(data){
             if(data.status === "success" && numberOfTries < 10){
-              clearAll();
+            clearAll();
             operationFinished(data);
         }
         else if(data.status !== "success" && numberOfTries < 10){
@@ -49,6 +44,7 @@ window.addEventListener('load', function(event)
             return addBook(e);
         }
         else if(numberOfTries >= 10){
+            clearAll();
             operationFailed(data);
         }
         })
@@ -57,7 +53,7 @@ window.addEventListener('load', function(event)
         }
         )}
 
-    // Fetch book function
+    // Function that fetches books stored
     function fetchBooks(){
         let request = new Request(url + 'op=select&key=' + key);
 
@@ -84,6 +80,7 @@ window.addEventListener('load', function(event)
                 return fetchBooks();
             }
             else if(numberOfTries >= 10){
+                clearAll();
                 operationFailed(data);
             } 
         })
@@ -102,7 +99,7 @@ window.addEventListener('load', function(event)
         .then(response => response.json())
         .then(function(data){
             if(data.status === "success" && numberOfTries < 10){
-               clearAll();
+                clearAll();
                 operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
@@ -111,6 +108,7 @@ window.addEventListener('load', function(event)
                 return editBook(e);
             }
             else if(numberOfTries >= 10){
+                clearAll();
                 operationFailed(data);
             }
         })
@@ -122,7 +120,6 @@ window.addEventListener('load', function(event)
     // Delete book function
     function deleteBook(e){
         e.preventDefault();
-
         let id = document.getElementById('deleteBookId').value;
         let request = new Request(url + 'op=delete&key=' + key + '&id=' + id, {
             method: 'POST',
@@ -130,8 +127,7 @@ window.addEventListener('load', function(event)
         
         fetch(request)
         .then(response => response.json())
-        .then(function(data){
-            
+        .then(function(data){      
             if(data.status === "success" && numberOfTries < 10){
                 clearAll();
                 operationFinished(data);
@@ -142,12 +138,13 @@ window.addEventListener('load', function(event)
                 return deleteBook(e);
             }
             else if(numberOfTries >= 10){
+                clearAll();
                 operationFailed(data);    
             } 
         });
     }
 
-    //Operation finished function
+    //Operation finished function - runs if operation succeeds
     function operationFinished(data){
         numberOfTries++;
         temp = numberOfTries;
@@ -155,7 +152,7 @@ window.addEventListener('load', function(event)
         return statusDiv.innerHTML = data.status + "</br>Operation finished after " + temp + " tries.";
     }
 
-    //Operation failed function
+    //Operation failed function - runs if operation does not succeed
     function operationFailed(data){
         temp = numberOfTries;
         numberOfTries = 0;
@@ -180,11 +177,6 @@ window.addEventListener('load', function(event)
         })
     }
 
-    //Local Storage - PRINTAR BARA NYCKELN TILL KONSOLEN. BEHÖVS EJ
-    function getLocalStorageKey(){
-        console.log(localStorage);
-    }
-
     // Function to show add form
     function showAddBookForm(){
         clearAll();
@@ -203,7 +195,7 @@ window.addEventListener('load', function(event)
         document.getElementById("deleteBook").style.display = 'block';
     }
 
-    // this function gets called a lot
+    //clears all visual data - this function gets called a lot
     function clearAll(){
         let edit = document.getElementById("editBook");
         let add = document.getElementById("addBook");
@@ -215,5 +207,4 @@ window.addEventListener('load', function(event)
         document.getElementById('statusDiv').innerText = '';
         document.getElementById('bookListDiv').innerHTML = '';
     }
-
 });

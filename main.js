@@ -10,10 +10,16 @@ window.addEventListener('load', function(event)
     .addEventListener('submit', addBook);
     let editBookForm = document.getElementById('editBook')
     .addEventListener('submit', editBook);
-    let fetchBookBtn = document.getElementById('fetchBookBtn')
-    .addEventListener('click', fetchBooks);
     let deleteBookBtn = document.getElementById('deleteBook')
     .addEventListener('submit', deleteBook);
+    let fetchBookBtn = document.getElementById('fetchBookBtn')
+    .addEventListener('click', fetchBooks);
+    let showAddBookFormBtn = document.getElementById('showAddBookFormBtn')
+    .addEventListener('click', showAddBookForm);
+    let showEditFormBtn = document.getElementById('showEditFormBtn')
+    .addEventListener('click', showEditBookForm);
+    let showDeleteBookFormBtn = document.getElementById('showDeleteBookFormBtn')
+    .addEventListener('click', showDeleteBookForm);
   
     //TEST BUTTONS - SE ÖVER NÄR VI ÄR KLARA OM VILKA SOM BEHÖVER ÄNDRAS OCH SÅ
     let getKeyBtn = document.getElementById('getKeyBtn')
@@ -34,6 +40,7 @@ window.addEventListener('load', function(event)
         .then(response => response.json())
         .then(function(data){
             if(data.status === "success" && numberOfTries < 10){
+              clearAll();
             operationFinished(data);
         }
         else if(data.status !== "success" && numberOfTries < 10){
@@ -67,6 +74,7 @@ window.addEventListener('load', function(event)
                             <li>Author: ${book.author}</li>
                         </ul>`;
                 });
+                clearAll();
                 document.getElementById('bookListDiv').innerHTML = bookListDiv;
                 operationFinished(data);
             }
@@ -77,7 +85,7 @@ window.addEventListener('load', function(event)
             }
             else if(numberOfTries >= 10){
                 operationFailed(data);
-            }            
+            } 
         })
     }
 
@@ -94,6 +102,7 @@ window.addEventListener('load', function(event)
         .then(response => response.json())
         .then(function(data){
             if(data.status === "success" && numberOfTries < 10){
+               clearAll();
                 operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
@@ -124,6 +133,7 @@ window.addEventListener('load', function(event)
         .then(function(data){
             
             if(data.status === "success" && numberOfTries < 10){
+                clearAll();
                 operationFinished(data);
             }
             else if(data.status !== "success" && numberOfTries < 10){
@@ -133,8 +143,8 @@ window.addEventListener('load', function(event)
             }
             else if(numberOfTries >= 10){
                 operationFailed(data);    
-            }   
-        })
+            } 
+        });
     }
 
     //Operation finished function
@@ -165,6 +175,8 @@ window.addEventListener('load', function(event)
             key = data.key;
             localStorage.setItem('LocalStorageKey', key);
             console.log("Key is: " + key);
+            clearAll();
+            document.getElementById('keyDiv').innerText = 'Your key is: ' + key;
         })
     }
 
@@ -172,4 +184,36 @@ window.addEventListener('load', function(event)
     function getLocalStorageKey(){
         console.log(localStorage);
     }
+
+    // Function to show add form
+    function showAddBookForm(){
+        clearAll();
+        document.getElementById("addBook").style.display = 'block';
+    }
+
+    // Function to show edit form
+    function showEditBookForm(){
+        clearAll();
+        document.getElementById("editBook").style.display = 'block';
+    }
+
+    // Function to show delete form
+    function showDeleteBookForm(){
+        clearAll();
+        document.getElementById("deleteBook").style.display = 'block';
+    }
+
+    // this function gets called a lot
+    function clearAll(){
+        let edit = document.getElementById("editBook");
+        let add = document.getElementById("addBook");
+        let del = document.getElementById("deleteBook");
+        del.style.display = 'none';
+        add.style.display = 'none';
+        edit.style.display = 'none';
+        document.getElementById('keyDiv').innerText = '';
+        document.getElementById('statusDiv').innerText = '';
+        document.getElementById('bookListDiv').innerHTML = '';
+    }
+
 });

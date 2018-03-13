@@ -5,39 +5,57 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Lab 2 web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="main.js"></script>
     </head>
     <body>
 
-        <button id="getKeyBtn">GET KEY TEST -> CHECK CONSOLE</button>
-        <button id="getLocalStorage">Print Local Storage</button>
-        <button id="fetchBookBtn">See all books</button>
+        <div class="horizontal-container header">
+            <div><h1>Welcome to the library!</h1></div>
+        </div>
 
-        <form id="addBook">
-            Add a book:<br>
-            <input type="text" id="addBookTitle" placeholder="Book title">
-            <input type="text" id="addAuthor" placeholder="Author">
-            <input type="submit" value="Add book">
-        </form>
+        <div class="vertical-container">
+            <div class="navigation">
+                <button class="navBtn" id="getKeyBtn">GET KEY TEST</button>
+                <button class="navBtn" id="getLocalStorage">Print Local Storage</button>
+                <button class="navBtn" id="fetchBookBtn">See all books</button>
+                <button class="navBtn" id="showAddBookFormBtn">Add a book</button>
+                <button class="navBtn" id="showEditFormBtn">Edit a book</button>
+                <button class="navBtn" id="showDeleteBookFormBtn">Delete a book</button>
+            </div>
 
-        <form id="editBook">
-            Edit book:<br>
-            <input type="text" id="editBookId" placeholder="Book ID">
-            <input type="text" id="editBookTitle" placeholder="Book title">
-            <input type="text" id="editAuthor" placeholder="Author">
-            <input type="submit" value="Edit book">
-        </form>
+            <div class="main">
+                <div id="statusDiv"></div>
+                <div id="bookListDiv"></div>
+                <div id="keyDiv"></div>
+            </div>
 
-        <div id="statusDiv"></div>
+            <form id="addBook">
+                <p>Add a book:</p>
+                <input type="text" id="addBookTitle" placeholder="Book title">
+                <input type="text" id="addAuthor" placeholder="Author">
+                <input type="submit" value="Add book">
+            </form>
 
-        <hr>
-        <form id="deleteBook">
-            <input type="text" id="deleteBookId" placeholder="Book ID">
-            <input type="submit" value="Delete Book">
-        </form>
+            <form id="editBook">
+                <p>Edit book:</p>
+                <input type="text" id="editBookId" placeholder="Book ID">
+                <input type="text" id="editBookTitle" placeholder="Book title">
+                <input type="text" id="editAuthor" placeholder="Author">
+                <input type="submit" value="Edit book">
+            </form>
 
-        <div id="bookListDiv"></div>
+            <form id="deleteBook">
+                <p>Delete book:</p>
+                <input type="text" id="deleteBookId" placeholder="Book ID">
+                <input type="submit" value="Delete Book">
+            </form>
+                
+        </div>
+        
+        <footer>
+            <p>Thank you for stopping by!</p>
+        </footer>
 
     </body>
 </html>

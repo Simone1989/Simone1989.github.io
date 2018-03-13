@@ -32,8 +32,8 @@ h1, footer{
 .navigation{
   background-color: #a49698;
   padding: 10px;
+  margin-bottom: 200px;
 }
-
 
 .navBtn{
   display: flex;

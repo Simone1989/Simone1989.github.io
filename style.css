@@ -1,6 +1,6 @@
 body{
   margin: 0px;
-  background-color: #a49698;
+  background-color: #533235;
   height: 100%;
 }
 .vertical-container {
@@ -10,15 +10,16 @@ body{
 .horizontal-container{
   display: flex;
   flex-direction: column;
-  
 }
-footer{
-  height: 400px;
-  color: black;
-  font-size: 50px;
+
+.content{
+  width: 1000px;
+  margin: auto;
+  background-color: #a49698;
 }
+
 h1{
-  font-size: 150px;
+  font-size: 50px;
   text-shadow: 3px 3px black;
   color: #b28589;
 }
@@ -26,13 +27,14 @@ h1, footer{
   text-align: center;
   font-family: "Cabin Sketch";
   background-image: url(images/books1.jpg);
+  background-position: middle;
   padding: 40px;
   margin: 0px;
 }
 .navigation{
   background-color: #a49698;
   padding: 10px;
-  margin-bottom: 200px;
+  margin-bottom: 350px;
 }
 
 .navBtn{
@@ -70,12 +72,28 @@ button:hover, button:active{
 
 @media only screen and (max-width: 500px) {
   .vertical-container {
-    flex-direction: column;
+    flex-direction: columnrow;
   }
   .nav {
     margin-right: 0px;
   }
   h1 {
-    font-size: 50px;
+    font-size: 30px;
   }
+  .content{
+    width: 500px;
+  }
+  .navigation{
+    margin-bottom: 10px;
+  }
+  .navBtn{
+    width: 150px;
+    height: 35px;
+    margin: 10px;
+  }
+  #statusDiv, #bookListDiv, #keyDiv{
+    margin-left: 20px;
+    
+  }
+
 }

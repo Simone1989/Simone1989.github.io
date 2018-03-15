@@ -11,43 +11,46 @@
         <script src="main.js"></script>
     </head>
     <body>
-        <div class="horizontal-container header">
-            <div><h1>Welcome to the library!</h1></div>
+        <div class="content">
+            <div class="horizontal-container header">
+                <div><h1>Welcome to the library!</h1></div>
+                </div>
+                <div class="vertical-container">
+                    <div class="navigation">
+                        <button class="navBtn" id="getKeyBtn">Request API key</button>
+                        <button class="navBtn" id="fetchBookBtn">See all books</button>
+                        <button class="navBtn" id="showAddBookFormBtn">Add a book</button>
+                        <button class="navBtn" id="showEditFormBtn">Edit a book</button>
+                        <button class="navBtn" id="showDeleteBookFormBtn">Delete a book</button>
+                    </div>
+                    <div class="main">
+                        <div id="bookListDiv"></div>
+                        <div id="keyDiv"></div>
+                        <div id="statusDiv"></div>
+                    </div>
+                    <form id="addBook">
+                        <p>Add a book:</p>
+                        <input type="text" id="addBookTitle" placeholder="Book title">
+                        <input type="text" id="addAuthor" placeholder="Author">
+                        <input type="submit" value="Add book">
+                    </form>
+                    <form id="editBook">
+                        <p>Edit book:</p>
+                        <input type="text" id="editBookId" placeholder="Book ID">
+                        <input type="text" id="editBookTitle" placeholder="Book title">
+                        <input type="text" id="editAuthor" placeholder="Author">
+                        <input type="submit" value="Edit book">
+                    </form>
+                    <form id="deleteBook">
+                        <p>Delete book:</p>
+                        <input type="text" id="deleteBookId" placeholder="Book ID">
+                        <input type="submit" value="Delete Book">
+                    </form>  
+                </div>
+                <footer>
+                    <p></p>
+                </footer>
         </div>
-        <div class="vertical-container">
-            <div class="navigation">
-                <button class="navBtn" id="getKeyBtn">Get request key</button>
-                <button class="navBtn" id="fetchBookBtn">See all books</button>
-                <button class="navBtn" id="showAddBookFormBtn">Add a book</button>
-                <button class="navBtn" id="showEditFormBtn">Edit a book</button>
-                <button class="navBtn" id="showDeleteBookFormBtn">Delete a book</button>
-            </div>
-            <div class="main">
-                <div id="bookListDiv"></div>
-                <div id="keyDiv"></div>
-                <div id="statusDiv"></div>
-            </div>
-            <form id="addBook">
-                <p>Add a book:</p>
-                <input type="text" id="addBookTitle" placeholder="Book title">
-                <input type="text" id="addAuthor" placeholder="Author">
-                <input type="submit" value="Add book">
-            </form>
-            <form id="editBook">
-                <p>Edit book:</p>
-                <input type="text" id="editBookId" placeholder="Book ID">
-                <input type="text" id="editBookTitle" placeholder="Book title">
-                <input type="text" id="editAuthor" placeholder="Author">
-                <input type="submit" value="Edit book">
-            </form>
-            <form id="deleteBook">
-                <p>Delete book:</p>
-                <input type="text" id="deleteBookId" placeholder="Book ID">
-                <input type="submit" value="Delete Book">
-            </form>  
-        </div>
-        <footer>
-            <p>Thank you for stopping by!</p>
-        </footer>
+        
     </body>
 </html>

@@ -128,6 +128,7 @@ window.addEventListener('load', function(event)
         fetch(request)
         .then(response => response.json())
         .then(function(data){      
+            // Fixa att button är disabled när den laddar
             if(data.status === "success" && numberOfTries < 10){
                 clearAll();
                 operationFinished(data);

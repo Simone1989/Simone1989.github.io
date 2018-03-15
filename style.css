@@ -63,6 +63,29 @@ button:hover, button:active{
   color: #371e20;
 }
 
+.submitBtn{
+  width: 100px;
+  height: 33px;
+  text-align: center;
+  color: #b28589;
+  background-color: #533235;
+  margin-left: 5px;
+}
+
+input{
+  background-color: #d3c3c5;
+  color: #533235;
+  height: 30px;
+  width: 150px;
+  font-family: "Poppins";
+  border: 0px;
+  text-align: center;
+}
+
+Input:focus{
+  background-color: white;
+}
+
 #statusDiv, #bookListDiv, #keyDiv{
   margin-top: 20px;
   margin-bottom: 20px;
